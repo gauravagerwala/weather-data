@@ -16,13 +16,11 @@ if(typeof argv.l === 'string' && argv.l.length >0){
   });
 }else{
   console.log('Finding location..');
-  location(function(loc){
-    if(loc){
-      weather(loc.city, function (currentWeather){
-        console.log(currentWeather);
-      })
-    }else{
-      console.log('Unable to fetch location informaation');
-    }
+  location().then( function(location){
+    return weather(location.city);
+  }).then(function (currentWeather){
+    console.log(currentWeather);
+  }).catch( function (error){
+    console.log(error);
   })
 }
