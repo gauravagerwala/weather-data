@@ -11,8 +11,10 @@ var argv = require('yargs').
 
 if(typeof argv.l === 'string' && argv.l.length >0){
   console.log('Location provided..');
-  weather(argv.l, function (currentWeather){
-    console.log(currentWeather);
+  weather(argv.l).then(function(data){
+    console.log(data);
+  }).catch( function(error){
+    console.log(error);
   });
 }else{
   console.log('Finding location..');
