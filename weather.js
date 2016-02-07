@@ -7,8 +7,8 @@ module.exports = function(location){
       var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
       url = url + encodedLocation + '&units=metric&appid=44db6a862fba0b067b1930da0d769e98';
 
-      if(!location){
-        reject('No location provided');
+      if(!(location.city)){
+        reject('Could not find location');
       }
       request({
           url: url,
@@ -18,7 +18,7 @@ module.exports = function(location){
               reject('Unable to fetch data');
             }else{
             }
-              resolve('It\'s ' + body.main.temp + ' in ' +body.name);
+              resolve(body);
        });
     });
 }
